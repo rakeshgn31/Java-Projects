@@ -1,0 +1,123 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    
+    <h:head>
+        <title>Products</title>
+        <h:outputStylesheet library="css" name="bootstrap.min.css" />
+        <h:outputStylesheet library="css" name="font-awesome.min.css" />
+        <h:outputStylesheet library="css" name="prettyPhoto.css" />
+        <h:outputStylesheet library="css" name="price-range.css" />
+        <h:outputStylesheet library="css" name="animate.css" />
+        <h:outputStylesheet library="css" name="main.css" />
+        <h:outputStylesheet library="css" name="responsive.css" />
+    </h:head>
+    <h:body>
+        <h:form>
+            <header id="header"><!--header-->   
+                <div class="header-middle"><!--header-middle-->
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="logo pull-left">
+                                    <a href="HomePage.xhtml"><img src="images/home/logo.png" alt="" /></a>
+                                </div>
+                            </div>
+                            <div class="col-sm-8">
+                                <div class="shop-menu pull-right">
+                                    <ul>
+                                        <li style="color:#0099CC">Hey... Welcome #{customer.strUsername} </li>
+                                    </ul>
+                                    <ul class="nav navbar-nav">
+                                        <li><a href="HomePage.xhtml"><i class="fa fa-home"></i> Home</a></li>
+                                        <li><a href="ShoppingBasketPage.xhtml"><i class="fa fa-shopping-cart"></i> Basket</a></li>
+                                        <li><a href="HistoryPage.xhtml"><i class="fa fa-history"></i> History</a></li>                                     
+                                        <li><h:commandLink onclick="if (!confirm('Sure to logout ?')) {
+                                                return false;
+                                            } else {                                            
+                                                return true;
+                                            }
+                                            " action="#{customer.logout()}"><i class="fa fa-unlock"></i> Logout</h:commandLink></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div><!--/header-middle-->
+            </header>
+
+            <section>
+
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <div class="left-sidebar">
+                                <h2>Category</h2>
+                                <div class="panel-group category-products" id="accordian"><!--category-products-->
+
+                                    <ui:repeat value="#{customer.listProdCategory}" var="value">
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">
+                                                <h4 class="panel-title"><h:commandLink value="#{value}" action="#{customer.getProducts(value)}"></h:commandLink></h4>
+                                            </div>
+                                        </div>
+                                    </ui:repeat>
+
+                                </div><!--/category-products-->
+                                <br/>
+                                
+                                <div class="shipping text-center"><!--shipping-->
+                                    <img src="images/home/shipping.jpg" alt="" />
+                                </div><!--/shipping-->
+
+                            </div>
+                        </div>
+
+                        <div class="col-sm-9 padding-right">
+                            <div class="features_items"><!--features_items-->
+                                <h2 class="title text-center">Featured Products</h2>
+                                <h5 class="title text-center"><h:outputText value="#{customer.strSelectedProdCategory}"/> </h5>
+                                <ui:repeat value="#{customer.listProducts}" var="product">
+                                    <div class="col-sm-4">
+                                        <div class="product-image-wrapper">
+                                            <div class="single-products">
+                                                <div class="productinfo text-center">
+                                                    <h4><h:outputText value="#{product.productName}"/></h4>
+                                                    <h2><h:outputText value="#{product.productPrice}"/> SEK</h2>
+                                                    <p>In Stock <h:outputText value="#{product.productQuantity}"/> units</p>	
+                                                </div>
+                                            </div>
+                                            <div class="choose">
+                                                <ul class="nav nav-pills nav-justified">
+                                                    <li>In Basket:<h:outputText value="#{customer.getQuantity(product)}"/> </li>
+                                                    <li><h:commandLink class="btn btn-default add-to-cart" action="#{customer.addToBasket(product)}">
+                                                            <i class="fa fa-shopping-cart"></i>Add to Basket</h:commandLink></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </ui:repeat>
+
+                            </div><!--features_items-->
+                            <h5 class="title text-center"><h:outputText value="#{customer.strErrorMessage}"/> </h5>
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+            <footer id="footer"><!--Footer-->
+
+                <div class="footer-bottom">
+                    <div class="container">
+                        <div class="row">
+                            <p class="pull-right">Designed by <span><a target="_blank" href="http://www.themeum.com">Themeum</a></span></p>
+                        </div>
+                    </div>
+                </div>
+
+            </footer><!--/Footer-->
+        </h:form>
+    </h:body>
+</html>

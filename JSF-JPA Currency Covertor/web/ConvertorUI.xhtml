@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>"Currency Convertor - Welcome"</title>
+    </h:head>
+    <h:body>
+        <h:form>
+            <p>
+                <h:outputLabel id="lblDescription" value="Hello Welcome... Money conversion made easy"/>
+            </p> <hr/>        
+            <h3>Select Currencies</h3>
+            <p>
+                <h:outputLabel id="lblFromCurrency" value="From Currency: "/>
+                <h:selectOneListbox id="listFromCurrency" size="5" value="#{UIHandlerBean.fromCurrency}">
+                    <f:selectItems value="#{UIHandlerBean.currenciesList}"/>
+                </h:selectOneListbox>
+            </p>
+            <p>
+                <h:outputLabel id="lblToCurrency" value="To Currency: "/>
+                <h:selectOneListbox id="listToCurrency" size="5" value="#{UIHandlerBean.toCurrency}">
+                    <f:selectItems value="#{UIHandlerBean.currenciesList}"/>
+                </h:selectOneListbox>
+            </p>
+            <p>
+                <h:outputLabel id="lblAmountToConvert" value="Enter Amount: "/>
+                <h:inputText id="tfAmountToConvert" value="#{UIHandlerBean.amountToConvert}"/>
+            </p>
+            <p>
+                <h:outputLabel id="lblConvertedAmount" value="Conversion Amount: "/>
+                <h:outputText id="tfConversionResult" value="#{UIHandlerBean.conversionAmount}"/>
+            </p>
+            <hr/>
+            <p>
+                <h:commandButton value="Convert" action="#{UIHandlerBean.convertAmount}"/>
+            </p>
+        </h:form>      
+    </h:body>
+</html>
+
